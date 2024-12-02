@@ -1,0 +1,108 @@
+==========================================================
+----------------------------------------------------------------------
+USE fruitstore;
+GO
+CREATE TRIGGER FruitInsertedTrigger
+ON fruit
+FOR INSERT
+AS
+BEGIN
+ DECLARE @newprice int
+ SELECT @newprice=price FROM INSERTED
+ IF (@newprice > 5000)
+  PRINT '고가의 과일 입고 시 관리부에 보고하시오'
+END;
+GO
+
+----------------------------------------------------------------------
+INSERT INTO fruit VALUES ('f8', '메론', 6000, 200, '서울');
+GO
+
+----------------------------------------------------------------------
+ALTER TRIGGER FruitInsertedTrigger
+ON fruit
+FOR INSERT
+AS
+BEGIN
+ DECLARE @newprice int
+ SELECT @newprice=price FROM INSERTED
+ IF (@newprice > 5000)
+  BEGIN
+   PRINT '입력 불가 : 고가의 과일 입고 시 관리부에 보고하시오'
+   ROLLBACK
+  END
+END;
+GO
+
+----------------------------------------------------------------------
+INSERT INTO fruit VALUES ('f9', '골드향', 8000, 500, '제주');
+GO
+
+----------------------------------------------------------------------
+DROP TRIGGER FruitInsertedTrigger;
+
+
+==========================================================
+----------------------------------------------------------------------
+USE fruitstore;
+GO
+CREATE FUNCTION ufn_GreatNum(@num1 int, @num2 int)
+RETURNS int
+AS
+BEGIN
+ DECLARE @result int
+ IF (@num1>@num2) SET @result=@num1
+ ELSE SET @result=@num2
+ RETURN @result
+END;
+GO
+
+----------------------------------------------------------------------
+SELECT dbo.ufn_GreatNum(15,20);
+
+----------------------------------------------------------------------
+CREATE FUNCTION ufn_SeoulCustomer()
+RETURNS TABLE
+AS
+RETURN (SELECT * FROM customer WHERE city='서울');
+GO
+
+----------------------------------------------------------------------
+SELECT * FROM dbo.ufn_SeoulCustomer();
+
+----------------------------------------------------------------------
+ALTER FUNCTION ufn_GreatNum(@num1 int, @num2 int)
+RETURNS int
+AS
+BEGIN
+ DECLARE @result int
+ IF (@num1>@num2) SET @result=@num1
+ ELSE SET @result=100
+ RETURN @result
+END;
+GO
+
+----------------------------------------------------------------------
+SELECT dbo.ufn_GreatNum(85,234);
+
+----------------------------------------------------------------------
+DROP FUNCTION dbo.ufn_SeoulCustomer;
+DROP FUNCTION dbo.ufn_GreatNum;
+
+==========================================================
+----------------------------------------------------------------------
+USE fruitstore;
+GO
+CREATE UNIQUE INDEX xs_fname
+ON fruit (fname);
+GO
+----------------------------------------------------------------------
+CREATE NONCLUSTERED INDEX ix_cname_city
+ON customer (cname)
+INCLUDE (city, point);
+----------------------------------------------------------------------
+DROP INDEX fruit.xs_fname;
+
+
+ 
+

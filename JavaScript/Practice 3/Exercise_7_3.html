@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>택시주행 요금계산(제출문제7-3)</title>
+ </head>
+ <body>
+    <SCRIPT>
+        var distance, basicFee, basicDis, overPay, taxiPay;
+		basicFee = 4800;
+		basicDis = 2000;
+		distance = parseInt(prompt("주행거리(미터)를 입력하세요"));
+		if(distance <= basicDis) {
+			  overPay = 0;
+	    } else {
+			  overPay = parseInt((distance - basicDis) / 180) * 100;
+		}
+		taxiPay = basicFee + overPay;
+		document.write("주행거리 : " +distance +"미터<BR>");
+		document.write("기본요금 : " +basicFee +"원<BR>");
+		document.write("추가요금 : " +overPay +"원<BR>");
+		document.write("택시요금 : " +taxiPay +"원<BR>");
+	</SCRIPT>
+ </body>
+</html>

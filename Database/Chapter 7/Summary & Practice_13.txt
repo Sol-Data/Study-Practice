@@ -1,0 +1,62 @@
+===============================================
+CREATE LOGIN MyTestLogin
+WITH PASSWORD = 'this3is2password!',
+DEFAULT_DATABASE = fruitstore,
+CHECK_EXPIRATION = ON,
+CHECK_POLICY = ON 
+-----------------------------------------------------------
+USE fruitstore;
+GO
+CREATE USER MyTest FOR LOGIN MyTestLogin;
+GO
+--=========================================================
+CREATE LOGIN [BUILTIN\Users]
+FROM WINDOWS
+WITH DEFAULT_DATABASE = fruitstore
+
+===============================================
+USE master;
+GO
+CREATE LOGIN superman
+WITH PASSWORD = 'q1w2e3r4';
+GO
+USE fruitstore;
+CREATE USER venus FOR LOGIN superman;
+GO
+--=========================================================
+USE fruitstore;
+GO
+CREATE ROLE wholesaler
+AUTHORIZATION venus;
+GO
+-----------------------------------------------------------
+GRANT INSERT ON customer TO wholesaler
+GO
+
+===============================================
+USE fruitstore;
+GO
+CREATE SCHEMA mySchema AUTHORIZATION venus
+CREATE TABLE SalesTip(source int, cost int, partnumber int);
+GO
+--=========================================================
+-- SalesTip 테이블의 소유 스키마를 mySchema에서 dbo로 변경
+ALTER SCHEMA dbo TRANSFER mySchema.SalesTip
+GO
+--=========================================================
+USE fruitstore;
+GO
+GRANT INSERT, DELETE, UPDATE ON dbo.customer TO venus;
+GO
+--=========================================================
+USE fruitstore;
+GO
+DENY INSERT, DELETE, UPDATE ON dbo.fruit TO venus;
+GO
+--=========================================================
+USE fruitstore;
+GO
+REVOKE INSERT, DELETE, UPDATE ON dbo.customer TO venus;
+GO
+REVOKE INSERT, DELETE, UPDATE ON dbo.fruit TO venus;
+GO

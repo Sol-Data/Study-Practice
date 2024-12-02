@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>제출문제 11-1</title>
+ </head>
+ <body>
+     <SCRIPT>
+         var n, mok, nam, count;
+		 count = 0;
+		 n = parseInt(prompt("정수를 입력 : "));
+		 document.write(n +"을 2진수로 표시할 때 1의 개수 : ");
+		 do {
+		     mok = parseInt(n/2);
+			 nam = n % 2;
+			 if(nam == 1) 
+			      count++;
+			 n = mok;		 
+		 } while (mok!=1);
+		 document.write(count+1);
+	 </SCRIPT>
+ </body>
+</html>

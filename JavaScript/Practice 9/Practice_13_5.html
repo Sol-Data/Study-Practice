@@ -1,0 +1,26 @@
+<html>
+  <head>
+     <title> 배열 : 인접한 값 교환 </title>
+  </head>
+  <body>
+     <script>
+         var a = [67, 54, 86, 32, 21, 18, 29, 45];
+		 var i, j, temp;
+		 document.write("&nbsp;&nbsp;&nbsp;수행 전 : ");      //수행 전 배열 출력
+		 for(i=0; i<8; i++) {
+			 document.write(a[i] +"&nbsp;&nbsp;&nbsp; ");
+		 }
+		 for(j=0; j<7; j++) {
+			 if(a[j] < a[j+1]) {
+				 temp = a[j];
+				 a[j] = a[j+1];
+				 a[j+1] = temp;
+			 }
+	     }
+		 document.write("<p>&nbsp;&nbsp;&nbsp;수행 후 : ");   //수행 후 배열 출력
+		 for(i=0; i<8; i++) {
+		  	document.write(a[i] +"&nbsp;&nbsp;&nbsp; ");
+		 }
+	</script>
+  </body>
+</html>

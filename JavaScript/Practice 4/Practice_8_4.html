@@ -1,0 +1,23 @@
+<html>
+  <head>
+     <title> nested IF문의 예제 </title>
+  </head>
+  <body>
+     <script>
+	    gender = prompt("성별?(M/F) : ");
+		document.write("성별 : " +gender +"<br>");
+		if(gender == "M" || gender == "m") {
+		    military = prompt("병역필?(Y/N) : ");
+			document.write("병역필 : " +military +"<br>");
+		    if(military == "Y" || military == "y") {
+			    division = "예비역";
+			} else  {
+			    division = "제1국민역";
+			}
+		} else {
+			division = "병역면제(여자)";
+		}
+		document.write("구분 : " +division +"<br>");
+	 </script>
+  </body>
+</html>

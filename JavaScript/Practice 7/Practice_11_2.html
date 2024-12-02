@@ -1,0 +1,19 @@
+<html>
+  <head>
+     <title> while문 : 5명의 성적을 입력받아 총점과 평균 구하기 </title>
+  </head>
+  <body>
+     <script>
+        var n=0, score, sum=0, ave;
+		while(n < 5) {
+		    n = n + 1;
+			score = parseInt(prompt(n +" 번째 학생 성적 : "));
+			document.write(n + " 번째 학생 성적 : " +score +"<br>");
+		    sum = sum + score;
+		}
+		ave = sum / n;
+		document.write("총점 : " +sum +"<br>");
+		document.write("평균 : " +ave.toFixed(2) +"<br>");
+     </script>
+  </body>
+</html>

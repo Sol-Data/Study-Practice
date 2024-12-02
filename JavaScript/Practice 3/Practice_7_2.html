@@ -1,0 +1,21 @@
+<html>
+  <head>
+     <title> 출석 9점 이상인 경우 성적 합계 구하기 </title>
+  </head>
+  <body>
+     <script>
+	var attend, midterm, finals, total;
+        attend = parseInt(prompt("출석점수(<=20)? "));
+	midterm = parseInt(prompt("중간점수(<=40)? "));
+	finals = parseInt(prompt("기말점수(<=40)? "));
+	if(attend >= 9) {
+	    total = attend + midterm + finals;
+	    document.write("출석 : " +attend +"<br>");
+	    document.write("중간 : " +midterm +"<br>");
+	    document.write("기말 : " +finals +"<br>");
+	    document.write("합계 : " +total +"<br>");
+	}
+	document.write("감사합니다.<br>");
+     </script>
+  </body>
+</html>

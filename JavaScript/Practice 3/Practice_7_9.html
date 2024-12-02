@@ -1,0 +1,28 @@
+<html>
+  <head>
+     <title> 핸드백 해외직구시 세금계산 </title>
+  </head>
+  <body>
+     <script>
+	    var price, tax, duty, vat, special;
+        price = parseInt(prompt("핸드백 가격(원)은? "));
+		vat = price * 0.1;
+		if price > 2000000 {
+	         duty = price * 0.08;
+			 special = price * 0.2;
+	    } else {
+	         duty = price * 0.07;
+			 special = 0;
+	    }
+        tax = duty + vat + special;
+		pay = price + tax;
+		document.write("핸드백 : " +price +"원<br><br>");
+		document.write("관세: " +duty +"원<br>");
+		document.write("부가세 : " +vat +"원<br>");
+		document.write("특소세 : " +special +"원<br>");
+		document.write("--------------------------<br>");
+		document.write("총세금 : " +tax +"원<br><br>");
+		document.write("총금액 : " +pay +"원<br>");
+	 </script>
+  </body>
+</html>

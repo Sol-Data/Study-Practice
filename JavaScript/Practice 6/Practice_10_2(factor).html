@@ -1,0 +1,19 @@
+﻿<html>
+  <head>
+     <title> nested for문 : 약수 구하기(2) </title>
+  </head>
+  <body>
+     <script>
+       var n, i;
+	   for(n=1;n<=20;n++) {
+	      document.write(n +"의 약수 : ");
+	      for(i=1; i<=n; i++)
+	      {
+		     if(n % i == 0)
+			    	document.write(i + "&nbsp&nbsp&nbsp&nbsp");
+	      }
+          document.write("<br>");
+	   }
+     </script>
+  </body>
+</html>

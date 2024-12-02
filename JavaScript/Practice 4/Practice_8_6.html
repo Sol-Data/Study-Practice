@@ -1,0 +1,31 @@
+<html>
+  <head>
+     <title> switch문 : 직급별 실 수령액 계산 </title>
+  </head>
+  <body>
+     <script>
+	    var position, code, income, tax, pay;
+        code = parseInt(prompt("직급코드?(1~3) : "));
+		income = parseInt(prompt("총소득?(원) : "));
+        switch(code) {
+			case 1:
+		        position = "과장";
+			    tax = income * 0.08;
+				break;
+		    case 2:
+		        position = "차장";
+			    tax = income * 0.12;
+				break;
+		    case 3:
+		        position = "부장";
+			    tax = income * 0.18;
+				break;
+		}
+		pay = income - tax;    //실 수령액 계산
+		document.write("직급 : " +position +"<br>");
+		document.write("총 소득 : " +income +"원<br>");
+		document.write("세금 : " +tax +"원<br>");
+		document.write("실 수령액 : " +pay +"원<br>");
+	 </script>
+  </body>
+</html>

@@ -1,0 +1,138 @@
+
+[0502-01-CREATE_DATABASE]---------------------------------
+CREATE DATABASE fruitstore
+ON
+(
+   NAME = 'fruitstore_db',
+   FILENAME = 'C:\SQLDB\fruitstore_db.mdf',
+   SIZE = 8MB,
+   MAXSIZE = 32MB,
+   FILEGROWTH = 10%
+);
+
+[0502-02-ALTER_DATABASE]---------------------------------
+ALTER DATABASE fruitstore
+MODIFY FILE
+(
+   NAME = 'fruitstore_db_log',
+   FILENAME = 'C:\SQLDB\fruitstore_db_log.ldf',
+   MAXSIZE = 128MB,
+   FILEGROWTH = 10%
+);
+
+[0502-03-DROP_DATABASE]---------------------------------
+DROP  DATABASE  fruitstore;
+
+[0502-04-CREATE_TABLE]---------------------------------
+USE fruitstore;
+GO
+CREATE TABLE customer
+(	cno			char(10)	NOT NULL,
+	cname		char(20)	NOT NULL,
+	city		char(20)	NOT NULL,
+	point		int			NOT NULL,
+	primary key (cno)
+);
+CREATE TABLE fruit
+(	fno			char(10)	NOT NULL,
+	fname		char(20)	NOT NULL,
+	price		int			NOT NULL,
+	quantity	int			NOT NULL,
+	city		char(20)	NOT NULL,
+	primary key (fno)
+)
+CREATE TABLE indent
+(	cno			char(10)	NOT NULL,
+	fno			char(10)	NOT NULL,
+	qty			int			NOT NULL,
+	odate		datetime	NOT NULL,
+	oprs		char(20)    NULL,
+	primary key (cno, fno, odate),
+	foreign key (cno) references customer,
+	foreign key (fno) references fruit
+);
+
+[0502-05-ALTER_TABLE]---------------------------------
+-- customer 테이블에 NULL값을 가질 수 없는 char(20) 형식의  telephone 속성을 새로 추가하기
+ALTER TABLE customer ADD telephone char(20) NOT NULL
+ALTER TABLE customer ADD telephone2 char(20) DEFAULT '010-000-0000' NOT NULL
+-- customer 테이블에 NULL값을 가질 수 없는 int 형식의 age 속성과 NULL 값을 가질 수 있는 char(10) 형식의  telephone 속성을 새로 추가하기
+ALTER TABLE customer ADD 
+    age int,
+    address char(10) DEFAULT '서울' NOT NULL;
+
+-- customer 테이블에서 age 속성의 NULL 지정을 NOT NULL로 변경하기
+ALTER TABLE customer ALTER COLUMN age int NOT NULL;
+-- customer 테이블에서 address 속성의  char(10) NOT NULL을 varchar(40) NULL로 변경하기
+ALTER TABLE customer ALTER COLUMN address varchar(40);
+
+-- customer 테이블에서 telephone 속성을 삭제하기
+ALTER TABLE customer DROP COLUMN telephone;
+-- customer 테이블에서 age속성과 address 속성을 동시에 삭제하기
+ALTER TABLE customer DROP COLUMN age, address;
+
+
+[0502-06-DROP_TABLE]---------------------------------
+DROP TABLE customer;
+
+================================================================
+
+[0503-01-INSERT]---------------------------------
+
+USE fruitstore;
+GO
+INSERT INTO customer VALUES ('c1', '이순신', '서울', 200);
+INSERT INTO customer VALUES ('c2', '김유신', '인천', 150);
+INSERT INTO customer VALUES ('c3', '홍길동', '인천', 300);
+INSERT INTO customer VALUES ('c4', '강감찬', '서울', 200);
+INSERT INTO customer VALUES ('c5', '안중근', '대전', 230);
+
+INSERT INTO fruit VALUES ('f1','오렌지', 1000,  500, '서울');
+INSERT INTO fruit VALUES ('f2','포도',   2000, 1000, '인천');
+INSERT INTO fruit VALUES ('f3','귤',      500, 1500, '청주');
+INSERT INTO fruit VALUES ('f4','사과',   2500,  300, '서울');
+INSERT INTO fruit VALUES ('f5','배',     3000,  200, '인천');
+INSERT INTO fruit VALUES ('f6','바나나', 1000,  400, '서울');
+
+INSERT INTO indent VALUES ('c1', 'f1', 300, '2021-12-21', '김효선');
+INSERT INTO indent VALUES ('c1', 'f2', 200, '2022-01-04', '이지연');
+INSERT INTO indent VALUES ('c1', 'f3', 400, '2022-01-19', '김효선');
+INSERT INTO indent VALUES ('c1', 'f4', 200, '2022-01-22', '이지연');
+INSERT INTO indent VALUES ('c1', 'f5', 100, '2022-01-23', '김효선');
+INSERT INTO indent VALUES ('c1', 'f6', 100, '2022-01-27', NULL);
+INSERT INTO indent VALUES ('c2', 'f1', 300, '2022-02-05', '이지연');
+INSERT INTO indent VALUES ('c2', 'f2', 400, '2022-02-16', '김효선');
+INSERT INTO indent VALUES ('c3', 'f2', 200, '2022-02-18', NULL);
+INSERT INTO indent VALUES ('c4', 'f2', 200, '2022-03-04', '이지연');
+INSERT INTO indent VALUES ('c4', 'f4', 300, '2022-03-10', '김효선');
+INSERT INTO indent VALUES ('c4', 'f5', 400, '2022-03-18', '김효선');
+
+INSERT INTO customer (cno, cname, city, point) VALUES ('c6', '유관순', '부산', 4000 );
+-- 또는  INSERT INTO customer VALUES ('c6', '유관순', '부산', 4000);
+
+INSERT INTO fruit (fno, city, fname) VALUES ('f7', '광주', '수박');  -- NULL 값을 삽입할 수 없기 때문에 오류 발생!
+INSERT INTO fruit (fno, city, fname, price, quantity) VALUES ('f7', '광주', '수박', 9000, 300);
+
+INSERT INTO indent VALUES ('c6', 'f7', 200, '2022-03-20', NULL);
+
+[0503-02-WHERE 조건을 가지지 않는 SELECT 구문]---------------------------------
+
+SELECT cno, cname FROM customer;
+SELECT fno FROM indent;
+SELECT DISTINCT fno FROM indent;
+SELECT * FROM fruit;
+SELECT cno, '포인트의 원화가치=', point * 1000 FROM customer;
+
+[0503-03-WHERE 조건을 가지는 SELECT 구문]---------------------------------
+
+SELECT cno, cname FROM customer WHERE point >= 300;
+SELECT * FROM fruit WHERE price >= 2000 AND city='서울';
+SELECT cno, cname FROM customer WHERE city IN ('서울', '대전', '광주');
+
+SELECT * FROM fruit WHERE price BETWEEN 2000 AND 3000;
+SELECT cno, fno, odate FROM indent WHERE oprs IS NULL;
+
+SELECT * FROM indent WHERE oprs LIKE '김%';
+
+SELECT * FROM customer WHERE point >= 200 ORDER BY cname;
+SELECT fno, fname FROM fruit ORDER BY price ASC, quantity DESC;

@@ -1,0 +1,184 @@
+
+CREATE  TABLE  customer2
+(		cno	char(10) 	NOT NULL,
+		cname	char(20) 	NOT NULL,
+		city	char(20)	NOT NULL,
+		point	int             NOT NULL,
+		primary key (cno)
+);
+
+INSERT INTO customer2 VALUES ('d1', '이율곡', '속초', 700);
+INSERT INTO customer2 VALUES ('d2', '이퇴계', '원주', 750);
+INSERT INTO customer2 VALUES ('d3', '장영실', '강릉', 800);
+INSERT INTO customer2 VALUES ('d4', '안창호', '포항', 600);
+INSERT INTO customer2 VALUES ('d5', '한용운', '울산', 930);
+INSERT INTO customer2 VALUES ('e1', '김좌진', '서울', 200);
+INSERT INTO customer2 VALUES ('e2', '장보고', '서울', 300);
+
+
+SELECT * FROM customer;
+SELECT * FROM customer2;
+
+-- INNER JOIN ---------------------------------------------------------------------------------------
+SELECT c1.cno, c2.* FROM customer c1 INNER JOIN customer2 c2 ON c1.city = c2.city;
+
+-- [JOIN 예제1] 
+SELECT customer.*, fruit.* FROM customer, fruit WHERE customer.city = fruit.city;
+SELECT C.*, F.* FROM customer C INNER JOIN fruit F ON C.city = F.city;
+
+-- [JOIN 예제2] 
+SELECT  indent.* FROM  fruit, indent WHERE fruit.fno = indent.fno AND fruit.fname = '사과';
+SELECT  I.* FROM  fruit F INNER JOIN indent I ON  F.fno = I.fno AND F.fname = '사과';
+
+-- [JOIN 예제3] 
+SELECT  I.*, C.cname FROM indent I, fruit F, customer C WHERE I.fno=F.fno AND I.cno = C.cno AND  F.fname = '포도';
+SELECT  I.*, C.cname FROM indent I INNER JOIN fruit F ON I.fno=F.fno INNER JOIN customer C ON  I.cno = C.cno AND F.fname = '포도';
+
+-- LEFT OUTER JOIN ----------------------------------------------------------------------------------
+SELECT c1.cno, c2.* FROM customer c1 LEFT OUTER JOIN customer2 c2 ON c1.city = c2.city;
+
+-- RIGHT OUTER JOIN --------------------------------------------------------------------------------
+SELECT c1.cno, c2.* FROM customer c1 RIGHT OUTER JOIN customer2 c2 ON c1.city = c2.city;
+
+-- FULL OUTER JOIN ----------------------------------------------------------------------------------
+SELECT c1.cno, c2.* FROM customer c1 FULL OUTER JOIN customer2 c2 ON c1.city = c2.city;
+
+-- CROSS OUTER JOIN --------------------------------------------------------------------------------
+SELECT c1.cno, c2.* FROM customer c1 CROSS JOIN customer2 c2;
+
+-- SELF JOIN -------------------------------------------------------------------------------------------
+CREATE TABLE Employee
+(EmployeeId INT, Name NVARCHAR(50), ManagerId INT)
+GO
+INSERT INTO Employee VALUES(1,'을지문덕',1)
+INSERT INTO Employee VALUES(2,'광개토왕',1)
+INSERT INTO Employee VALUES(3,'세종대왕',2) 
+INSERT INTO Employee VALUES(4,'박혁거세',2) 
+GO
+SELECT * FROM Employee;
+GO
+SELECT E.EmployeeId, E.Name 'Employee Name', M.Name 'Manager Name'
+FROM Employee E 
+        INNER JOIN Employee M
+            ON M.EmployeeId = E.ManagerId;
+
+=============================================================================================
+-- 문자열 함수
+SELECT ASCII(cno), cno FROM customer;
+SELECT CHAR(75);
+SELECT CHARINDEX('HAVE', 'I HAVE A DREAM');
+SELECT LEFT('Seoul Digital Universtity', 5);
+SELECT * FROM fruit WHERE LEN(fname)=2;
+SELECT UPPER('Seoul Digital Universtity'); 
+SELECT LTRIM('     Seoul Digital University     ');
+SELECT PATINDEX('%지하철%', '서울 지하철 9호선');
+SELECT REPLACE('I am a girl', 'girl', 'boy');
+SELECT REPLICATE('Software  ', 3);
+SELECT REVERSE('소프트웨어공학과');
+SELECT 'SDU', SPACE(5), '소프트웨어공학과';
+SELECT STR(123.45, 6, 1);
+SELECT STUFF('서울 인천 부산', 4, 3, '대전 ');
+SELECT cno, SUBSTRING(cname, 1, 1), city, point FROM customer;
+
+-- 수치 연산 함수
+SELECT ABS(-2.0+(-4.0)), ABS(0.0), ABS(-3.0);
+SELECT ACOS(1.0), ASIN(0.5), ATAN(1.0);
+SELECT COS(90.0), SIN(90.0), TAN(45.0), COT(90.0);
+SELECT CEILING(123.45), CEILING(-123.45);
+SELECT DEGREES(PI()/2), RADIANS(1e-32);
+SELECT EXP(1), EXP(2), EXP(10);
+SELECT FLOOR(123.45), FLOOR(-123.45), FLOOR(123.0);
+SELECT LOG(10),  LOG10(10);
+SELECT PI( ), PI( )*2; 
+SELECT POWER(2, 2), POWER(2, 4), POWER(2, 8);
+SELECT RAND(100), RAND( ), RAND( );
+SELECT ROUND(123.95, 2), ROUND(456.945, 2, 1);
+SELECT SIGN(-100), SIGN(0), SIGN(100);
+SELECT SQRT(64), SQRT(0), SQRT(100);
+SELECT SQUARE(1), SQUARE(2), SQUARE(8);
+
+-- 날짜와 시간 함수
+SELECT odate, DATEADD(week, 1, odate) FROM indent;
+SELECT odate, GETDATE(), DATEDIFF(day, odate, GETDATE()) FROM indent;
+SELECT odate, GETDATE(), DATENAME(month, odate) FROM indent;
+SELECT DATEPART(month, '2022-05-15');
+SELECT * FROM indent  WHERE  MONTH(odate)=1;
+SELECT GETDATE(), GETUTCDATE();
+
+-- 메타데이터 함수
+SELECT COL_LENGTH('customer', 'cname');
+SELECT COL_NAME(OBJECT_ID('customer'), 2);
+SELECT COLUMNPROPERTY(OBJECT_ID('customer'), 'city', 'PRECISION');
+SELECT OBJECT_ID('customer');
+
+===============================================================================================
+-- [집계 함수 사용 예제 1] 
+SELECT * FROM customer;
+SELECT count(*) FROM customer;
+-- [집계 함수 사용 예제 2] 
+SELECT count(DISTINCT oprs) FROM indent;
+-- [집계 함수 사용 예제 3]
+SELECT * FROM customer WHERE city='서울';
+SELECT sum(point) FROM customer WHERE city='서울';
+-- [집계 함수 사용 예제 4]
+SELECT cno, qty FROM indent;
+SELECT cno, sum(qty) FROM indent GROUP BY cno;
+-- [집계 함수 사용 예제 5] 
+SELECT cno, count(*) FROM indent GROUP BY cno HAVING count(*) >= 3;
+
+-- [중첩된 질의문 사용 예제 1] 
+SELECT cno FROM customer
+WHERE city = ( SELECT city FROM fruit WHERE fno = 'f1' );
+-- [중첩된 질의문 사용 예제 2] 
+SELECT cno, cname FROM customer
+WHERE point >= ( SELECT avg(point) FROM customer );
+-- [중첩된 질의문 사용 예제 3] 
+SELECT cname FROM customer
+WHERE cno IN ( SELECT cno FROM indent WHERE fno = 'f2' );
+
+-- [UPDATE 구문의 사용 예제 1] 
+SELECT * FROM fruit WHERE fno = 'f2';
+
+UPDATE fruit 
+SET price = 2500, quantity = quantity - 200
+WHERE fno = 'f2';
+
+SELECT * FROM fruit WHERE fno = 'f2';
+
+UPDATE fruit
+SET price = 2000, quantity = quantity + 200
+WHERE fno = 'f2';
+
+SELECT * FROM fruit WHERE fno = 'f2';
+
+-- [UPDATE 구문의 사용 예제 2] 
+SELECT * FROM customer WHERE city = '서울';
+
+UPDATE customer
+SET point = point * 2
+WHERE city = '서울';
+
+SELECT * FROM customer WHERE city = '서울';
+
+UPDATE customer
+SET point = point / 2
+WHERE city = '서울';
+
+SELECT * FROM customer WHERE city = '서울';
+
+-- [DELETE 구문의 사용 예제 1]
+SELECT * FROM customer;
+DELETE  FROM  customer WHERE cno='c5';
+SELECT * FROM customer;
+INSERT INTO customer VALUES('c5', '안중근', '대전', 230);
+SELECT * FROM customer;
+
+-- [DELETE 구문의 사용 예제 2]
+SELECT * FROM indent;
+DELETE FROM  indent WHERE odate < '2022-01-01';
+SELECT * FROM indent;
+INSERT INTO indent VALUES('c1', 'f1', 300, '2021-12-21', '김효선');
+SELECT * FROM indent;
+
+-- [DELETE 구문의 사용 예제 3]
+DELETE FROM indent;

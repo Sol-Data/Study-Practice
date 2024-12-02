@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>멤버십 포인트 결제(제출문제7-10)</title>
+ </head>
+ <body>
+    <SCRIPT>
+        var price, saving, point, payment;
+		point = 10000;
+		price = parseInt(prompt("물건 구입 가격(원)을 입력하시오"));
+		saving = prompt("Y-포인트 적립 / N-포인트 차감?");
+		if((saving == "Y") || (saving == "y")) {
+			division = "포인트 적립";
+			point = point + (price * 0.1);
+			payment = price;
+		} else {
+			division = "포인트 차감";
+			point = point - (price * 0.06);
+			payment = price - (price * 0.06);
+		}
+		document.write("구입가격 : " +price +"원<BR>");
+		document.write("결제구분 : " +division +"<BR>");
+		document.write("포인트 : " +point +"점<BR>");
+		document.write("결제금액 : " +payment +"원<BR>");
+	</SCRIPT>
+ </body>
+</html>

@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>제출문제12-7</title>
+ </head>
+ <body>
+    <SCRIPT>
+      var a=[12, 28, 31, 38, 46, 52, 58, 62, 79, 90];
+	  var k=0, b = [];
+	  document.write("실행 전 : ");
+	  for(i=0; i<10; i++) {
+		  document.write(a[i] +"&nbsp;&nbsp; ");
+	  }
+	  n = parseInt(prompt("삽입할 정수를 입력하시오"));
+	  document.write("<BR><BR>");
+	  document.write("삽입할 정수 : " + n +"<BR>");
+	  for(i=0; i<10; i++) {		  
+		  if(n < a[i]) {
+			  b[k] = n;
+			  k=i+1;
+		  }
+		  b[k] = a[i];
+		  k++;
+	  }
+	  if(n > a[9]) {
+		  b[k] = n;
+	  }
+	  document.write("실행 후 : ");
+	  for(i=0; i<11; i++) {
+		  document.write(b[i] +"&nbsp;&nbsp; ");
+	  }
+
+
+   </SCRIPT>
+ </body>
+</html>

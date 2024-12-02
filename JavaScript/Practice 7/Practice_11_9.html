@@ -1,0 +1,18 @@
+<html>
+  <head>
+     <title> do~while : 소비하고 남은 물의 용량 출력 </title>
+  </head>
+  <body>
+     <script>
+        var week, sum, water;
+		week=0;
+		sum=10000;
+		water = 185;
+		do {
+		      week = week + 1;
+		      sum = sum - water;
+			  document.write(week +"주차 : " + sum +"ton<br>");
+		} while(sum > 0);
+     </script>
+  </body>
+</html>

@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>제출문제 9장-03</title>
+ </head>
+ <body>
+    <SCRIPT>
+       var i, sum, sign;
+	   sum = 0;
+	   for(i=1; i<=1000; i++) {
+		   if(i%2 == 1)
+		        sign = 1;
+			else
+			    sign = -1
+			sum = sum + (sign * i);
+	   }
+	   document.write("1 - 2 + 3 - 4 + ... + 999 - 1000 = " +sum);
+	</SCRIPT>
+ </body>
+</html>

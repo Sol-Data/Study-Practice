@@ -1,0 +1,18 @@
+<html>
+  <head>
+     <title> while문 : 100만원 연복리 3.5% 5년 예치 상품 </title>
+  </head>
+  <body>
+     <script>
+        var n, rate, sum;
+		n = 0;
+		rate = 0.035;
+        sum = 1000000;
+		while(n<5) {
+			sum = sum + (sum * rate);
+		    n = n + 1;
+			document.write(n +"년 : " +sum.toFixed(0) +"원<br>");
+		}
+	</script>
+  </body>
+</html>

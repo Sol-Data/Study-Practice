@@ -1,0 +1,42 @@
+<html>
+  <head>
+     <title> 2차원배열 : 행렬의 합 </title>
+  </head>
+  <body>
+     <script>
+         var a = [[3, 5, 4],
+                  [7, 6, 9],
+                  [3, 4, 8]];
+		 var b = [[7, 9, 8],
+                  [6, 9, 3],
+                  [8, 7, 7]];
+         var c = [[],[],[]];
+		 for(i=0; i<3; i++) {
+			 for(j=0; j<3; j++) {
+                   c[i][j] = a[i][j] + b[i][j];
+			 }
+		 } 
+		 document.write("<p>행렬 A<br>");
+		 for(i=0; i<3; i++) {
+			 for(j=0; j<3; j++) {
+                   document.write(a[i][j] +"&nbsp;&nbsp;");
+			 }
+			 document.write("<br>");
+		 } 
+		 document.write("<p>행렬 B<br>");
+		 for(i=0; i<3; i++) {
+			 for(j=0; j<3; j++) {
+                   document.write(b[i][j] +"&nbsp;&nbsp;");
+			 }
+			 document.write("<br>");
+		 } 
+		 document.write("<p>행렬 A+B의 결과<br>");
+		 for(i=0; i<3; i++) {
+			 for(j=0; j<3; j++) {
+                   document.write(c[i][j] +"&nbsp;&nbsp;");
+			 }
+			 document.write("<br>");
+		 } 
+	</script>
+  </body>
+</html>

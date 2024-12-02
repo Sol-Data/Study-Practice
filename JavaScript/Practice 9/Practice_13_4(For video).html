@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title> (실습13-4) 선택정렬(Selection Sort) </title>
+ </head>
+ <body>
+    <SCRIPT>
+	    var a = [67, 54, 86, 32, 21, 18, 29, 45];
+		var i, j, minindex, temp;
+		document.write("&nbsp;&nbsp;&nbsp;수행 전 : ");
+		for(i=0; i<a.length; i++) {
+			document.write(a[i] + "&nbsp;&nbsp;&nbsp;");
+		}
+
+		for(i=0; i<(a.length-1); i++) { 
+		     minindex = i;
+             for(j=i; j<a.length; j++) {
+		          if(a[minindex] > a[j]) {
+				         minindex = j;
+			      }
+		      }
+		      temp = a[minindex];
+		      a[minindex]=a[i];
+		      a[i] = temp;
+              // 각 단계별 수행 후 배열의 값 출력
+              document.write("<p>i = " +i +" 일때 : ");
+              for(k=0; k<a.length; k++) {
+		        	document.write(a[k] + "&nbsp;&nbsp;&nbsp;");
+	          }
+
+		}
+		document.write("<p>");
+		document.write("&nbsp;&nbsp;&nbsp;수행 후 : ");
+		for(i=0; i<a.length; i++) {
+		   	document.write(a[i] + "&nbsp;&nbsp;&nbsp;");
+	    }
+	</SCRIPT>
+ </body>
+</html>

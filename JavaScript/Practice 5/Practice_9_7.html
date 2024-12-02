@@ -1,0 +1,22 @@
+<html>
+  <head>
+     <title> for문 : 약수의 개수를 이용한 소수구하기(1) </title>
+  </head>
+  <body>
+     <script>
+        var n, i, count;
+		n = parseInt(prompt("양의 정수를 입력하시오"));
+		count = 0;
+		for(i=1; i<=n; i++) {
+	        if(n % i == 0) {
+		        count = count + 1;
+	        }
+		}
+        if(count == 2) {   // 약수의 개수가 2개이면 소수(prime number)
+	         document.write(n + "은 소수입니다.<br>");
+		} else {
+             document.write(n + "은 소수가 아닙니다.<br>");
+		}
+     </script>
+  </body>
+</html>

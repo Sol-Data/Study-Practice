@@ -1,0 +1,32 @@
+<html>
+  <head>
+     <title> 배열 : 버블정렬(내림차순) </title>
+  </head>
+  <body>
+     <script>
+         var a = [67, 54, 86, 32, 21, 18, 29, 45];
+		 var i, j, temp;
+		 document.write("&nbsp;&nbsp;&nbsp;정렬 전 : ");      //정렬 전 배열 출력
+		 for(i=0; i<8; i++) {
+			 document.write(a[i] +"&nbsp;&nbsp;&nbsp; ");
+		 }
+		 for(i=0; i<7; i++) {
+			 for(j=0; j<7; j++) {
+				 if(a[j] < a[j+1]) {
+					 temp = a[j];
+					 a[j] = a[j+1];
+					 a[j+1] = temp;
+				 }
+			 }
+			 document.write("<p> i = " +i +" 일때 : ");      //배열 출력
+		     for(k=0; k<8; k++) {
+			         document.write(a[k] +"&nbsp;&nbsp;&nbsp; ");
+		     }
+		 }
+		 document.write("<p>&nbsp;&nbsp;&nbsp;정렬 후 : ");   //정렬 후 배열 출력
+		 for(i=0; i<8; i++) {
+		  	document.write(a[i] +"&nbsp;&nbsp;&nbsp; ");
+		 }
+	</script>
+  </body>
+</html>

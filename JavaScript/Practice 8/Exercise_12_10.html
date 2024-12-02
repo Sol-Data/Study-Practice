@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>제출문제 12-10</title>
+ </head>
+ <body>
+    <SCRIPT>
+         var station = ["서울", "천안아산", "오송", "대전", "동대구", "", "부산"];
+		 var fee = [0, 14100, 18500, 23700, 48300, 0, 58800];
+         var departure, arrival, number, total=0;
+		 departure = "서울";
+		 arrival = parseInt(prompt("도착역 코드?"));
+		 number = parseInt(prompt("승차 인원?"));
+		 total = fee[arrival-1]*number;
+		 document.write("출발역 : " +departure +"<BR>");
+         document.write("도착역 : " +station[arrival-1] +"<BR>");
+		 document.write("인원 : " +number +"명<BR>");
+		 document.write("운임요금 : " +total +"원<BR>");
+	</SCRIPT>
+ </body>
+</html>

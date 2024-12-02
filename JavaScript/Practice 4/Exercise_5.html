@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>제출문제 Ch8-05</title>
+ </head>
+ <body>
+    <SCRIPT>
+	   var code, kwh, tax, charge, season;
+	   tax = 0;
+	   charge = 0;
+       code = parseInt(prompt("계절코드(1~3) 입력 : ")); 
+       kwh = parseInt(prompt("전력사용량(Kwh) 입력 : ")); 
+       switch(code) {
+		   case 1:
+		      season = "봄, 가을철";
+              tax = (kwh * 65) * 0.04;
+              charge = 5550 + (kwh * 65) + tax;
+              break;
+		   case 2:
+		      season = "여름철";
+              tax = (kwh * 86) * 0.06;
+              charge = 6900 + (kwh * 86) + tax;
+              break;
+		   case 3:
+		      season = "겨울철";
+              tax = (kwh * 84) * 0.05;
+              charge = 6490 + (kwh * 84) + tax;
+       }
+	   document.write("계절 : " +season +"<BR>");
+	   document.write("전력사용량 : " +kwh +"Kwh<BR>");
+	   document.write("세금 : " +tax +"원<BR>");
+	   document.write("전기요금 : " +charge +"원<BR>");
+	</SCRIPT>
+ </body>
+</html>

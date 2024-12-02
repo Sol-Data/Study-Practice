@@ -1,0 +1,30 @@
+<html>
+  <head>
+     <title> 배열 : 첫 번째 원소에 가장 작은 값(b) </title>
+  </head>
+  <body>
+     <script>
+         var a = [67, 54, 86, 32, 21, 18, 29, 45];
+	var i, minidx, temp;
+	document.write("수행 전 : ");
+	for(i=0; i<8; i++) {
+		document.write(a[i] +"&nbsp;&nbsp;&nbsp; ");
+	}
+	minidx = 0;
+	for(i=1; i<8; i++) {
+		if(a[minidx] > a[i]) {
+			minidx = i;
+		}
+	}
+	if(minidx != 0) {
+		temp = a[minidx];
+		a[minidx] = a[0];
+		a[0] = temp;
+	}
+         document.write("<br>수행 후 : ");
+	for(i=0; i<8; i++) {
+		document.write(a[i] +"&nbsp;&nbsp;&nbsp; ");
+	}
+     </script>
+  </body>
+</html>

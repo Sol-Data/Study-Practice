@@ -1,0 +1,17 @@
+﻿<html>
+  <head>
+     <title> for문 : 약수 구하기(1) </title>
+  </head>
+  <body>
+     <script>
+      var n, i;
+	  n = parseInt(prompt("양의 정수를 입력하시오"));
+	  document.write(n +"의 약수 : ");
+	  for(i=1; i<=n; i++)
+	  {
+		  if(n % i == 0)
+				document.write(i + "&nbsp&nbsp&nbsp&nbsp");
+	  }
+     </script>
+  </body>
+</html>

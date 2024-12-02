@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>제출문제 Ch8-02</title>
+ </head>
+ <body>
+    <SCRIPT>
+	   var level, local, group, tuition, discount;
+	   discount = 0;
+	   tuition = 80000;
+       level = parseInt(prompt("레벨 입력(1~3) : "));
+       local = prompt("지역주민 유무(Y/N)? : ");
+       if(level == 1) {
+		   group = "물개반";
+           discount = tuition * 0.03;
+	   } else if(level == 2) {
+		   group = "돌고래반";
+		   discount = tuition * 0.05;
+	   } else {
+		   group = "상어반";
+		   discount = tuition * 0.07;
+	   }
+	   if(local == "Y" || local == "y") {
+	      discount = discount + 10000;
+	   }
+       tuition = tuition - discount;
+	   document.write("지역주민 : " +local.toUpperCase() +"<BR>");
+	   document.write("수강반 : " +group +"<BR>");
+	   document.write("할인금액 : " +discount +"원<BR>");
+	   document.write("결제금액 : " +tuition +"원<BR>");
+	</SCRIPT>
+ </body>
+</html>

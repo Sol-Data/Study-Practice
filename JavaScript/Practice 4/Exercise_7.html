@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>제출문제 Ch8-07</title>
+ </head>
+ <body>
+   <SCRIPT>
+      var code, hour, overPay, overTime, position, beforTax, tax, pay;
+      code = parseInt(prompt("직급코드(1~3) 입력 : "));
+      hour = parseInt(prompt("근무시간 입력 : "));
+	  overPay = 0;
+	  overTime = hour - 40;
+	  if(overTime > 0) {
+		  switch(code) {
+			  case 1:
+			       overPay = overTime * (10000 * 0.5);
+				   break;
+			  case 2:
+			       overPay = overTime * (15000 * 0.5); 
+				   break;
+              case 3:
+			       overPay = overTime * (18000 * 0.5); 
+	      }
+	  }
+	  switch(code) {
+		  case 1:
+		       position = "과장";
+		       beforeTax = 1500000 + (hour * 10000) + overPay;
+			   break;
+		  case 2:
+		       position = "차장";
+		       beforeTax = 1800000 + (hour * 15000) + overPay;
+			   break;
+             case 3:
+		       position = "부장";
+		       beforeTax = 2000000 + (hour * 18000) + overPay;
+      }
+	  if(beforeTax > 4000000) {
+		  tax = beforeTax * 0.15;
+	  } else if(beforeTax >= 2000000) {
+		  tax = beforeTax * 0.11;
+	  } else {
+		  tax = beforeTax * 0.08;
+	  }
+	  pay = beforeTax - tax;
+	  document.write("직급 : " +position +"<BR>");
+	  document.write("근무시간 : " +hour +"시간<BR>");	  
+	  document.write("초과수당 : " +overPay +"원<BR>");
+	  document.write("총급여 : " +beforeTax +"원<BR>");
+	  document.write("세금 : " +tax +"원<BR>");
+	  document.write("실수령액 : " +pay +"원<BR>");
+   </SCRIPT>
+ </body>
+</html>

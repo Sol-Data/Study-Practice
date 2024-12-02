@@ -1,0 +1,24 @@
+<html>
+  <head>
+     <title> while문 : 작은 수에서 큰 수까지 모든 정수의 합 </title>
+  </head>
+  <body>
+     <script>
+        var i, min, max, temp, sum;
+		sum = 0;
+		min = parseInt(prompt("첫번째 정수 : "));
+		max = parseInt(prompt("두번째 정수 : "));
+		document.write(min +"부터 " +max +"까지의 합은 ");
+		if(min > max) {
+		    temp = min;
+		    min = max;
+		    max = temp;
+		}
+		while(min <= max) {
+			sum = sum + min;
+			min = min + 1;
+		}
+		document.write(sum +" 입니다.<br>");
+     </script>
+  </body>
+</html>

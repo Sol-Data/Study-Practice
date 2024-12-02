@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>제출문제12-4</title>
+ </head>
+ <body>
+    <SCRIPT>
+      var n, mok, nam, i=0, k;
+	  var a = [];
+      n = parseInt(prompt("정수 입력 : "));
+	  document.write(n +"의 2진수 : ")
+      do {
+             mok = parseInt(n/2);   // 몫
+             a[i] = n % 2; 
+			 i++;
+			 n = mok;		   
+      } while (mok != 1);
+	  a[i] = mok;
+	  
+	  for(k=i; k>=0; k--) {
+		  document.write(a[k] +"  ");
+	  }
+   </SCRIPT>
+ </body>
+</html>

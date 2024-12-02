@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>제출문제 13-6</title>
+ </head>
+ <body>
+    <SCRIPT>
+	   var car=[[273000,   259000,  232000,  219000],
+	            [525000,   495000,  468000,  445000],
+				[858000,   815000,  772000,  729000],
+				[1150000, 1086000, 1028500,  978000]];
+		var i, j, cc, yr, CarTax, eduTax, totTax;
+		cc = parseInt(prompt("배기량(CC) 입력 : "));
+		yr = parseInt(prompt("자동차 연차(년) 입력 : "));
+		switch(yr) {
+			case 0 :
+			case 1 :
+			case 2 :
+			     j = 0;
+				 break;
+		    case 3 :
+			     j = 1;
+				 break;
+		    case 4 :
+			     j = 2;
+				 break;
+			default :
+			     j = 3
+		}
+		if(cc < 1000) 
+		      i = 0;
+		else if(cc < 2000)
+		      i = 1;
+	    else if(cc < 3000)
+		      i = 2;
+		else
+		      i = 3;
+		carTax = car[i][j];
+		eduTax = carTax * 0.3;
+		totTax = carTax + eduTax;
+		document.write("배기량 : " +cc +"CC<BR>");
+        document.write("연차 : " +yr +"년<BR>");
+		document.write("자동차세 : " +carTax +"원<BR>");
+		document.write("지방교육세 : " +eduTax +"원<BR>");
+		document.write("자동차세금 : " +totTax +"원<BR>");
+	</SCRIPT>  
+ </body>
+</html>

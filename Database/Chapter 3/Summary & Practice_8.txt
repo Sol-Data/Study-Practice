@@ -1,0 +1,163 @@
+======================================================
+USE master;
+GO
+SELECT count(*) FROM sys.system_views;
+
+USE fruistore;
+GO
+SELECT * FROM sys.servers;
+GO
+SELECT * FROM sys.tables;
+GO
+SELECT * FROM sys.columns;
+GO
+SELECT * FROM sys.indexes;
+
+======================================================
+--질의01. 특정 테이블(customer) 이름이 갖고 있는 속성의 이름들을 모두 검색하기
+SELECT name FROM sys.columns
+WHERE object_id = object_id('customer');
+
+--질의02. identiy 데이터 형식의 속성을 갖고 있는 모든 테이블의 이름과 속성의 이름을 검색하
+SELECT object_name(object_id), name
+FROM  sys.identity_columns;
+
+--질의03. 현재 서버가 가지고 있는 모든 데이터베이스의 이름을 검색하기
+SELECT name FROM sys.databases;
+
+--질의04. 특정 데이터베이스가 가지고 있는 저장 프로시저의 이름들을 모두 검색하기
+SELECT name FROM sys.procedures;
+
+--질의05. 특정 데이터베이스가 가지고 있는 테이블의 이름들을 모두 검색하기
+SELECT name FROM sys.tables;
+
+--질의06. 특정 데이터베이스가 가지고 있는 뷰의 이름들을 모두 검색하기
+SELECT name FROM  sys.views;
+
+--질의07. 특정 서버 인스턴스가 가지고 있는 로그인명들을 모두 검색하기
+SELECT name FROM sys.sql_logins;
+
+--질의08. 현재 서버가 가지고 있는 모든 테이터 형들의 모든 정보를 검색하기
+SELECT * FROM sys.systypes;
+
+--질의09. 고객번호(cno) 속성을 포함한 테이블의 이름을 검색하기
+SELECT object_name(object_id) FROM sys.columns
+WHERE name = 'cno';
+
+--질의10. 과일(fruit) 테이블이 갖고 있는 모든 속성들의 이름을 검색하기
+SELECT name FROM  sys.columns
+WHERE object_id = object_id('fruit');
+
+--질의11. fruitstore 데이터베이스의 모든 뷰의 이름을 검색하기
+SELECT name FROM sys.views;
+
+--질의12. 고객(customer) 테이블이 갖고 있는 모든 속성의 개수를 검색하기
+SELECT count(*) FROM sys.columns
+WHERE object_id = object_id('customer');
+
+======================================================
+SELECT * FROM fruit;
+CREATE VIEW cheap_fruit (fno, fname, quantity, city)
+AS  SELECT  fno, fname, quantity, city
+      FROM  fruit
+      WHERE  price <= 1000;
+SELECT * FROM cheap_fruit;
+----------------------------------------------------------------------------
+SELECT * FROM indent;
+CREATE VIEW custby (cno, totqty)
+AS  SELECT  cno, sum(qty)
+      FROM  indent
+      GROUP BY cno;
+SELECT * FROM custby;
+----------------------------------------------------------------------------
+SELECT * FROM customer;
+SELECT * FROM fruit;
+CREATE VIEW city_pair (f1city, f2city)
+AS  SELECT  f1.city, f2.city
+      FROM  fruit  f1, customer  f2
+      WHERE  f1.city = f2.city;
+SELECT * FROM city_pair;
+----------------------------------------------------------------------------
+SELECT * FROM cheap_fruit;
+CREATE VIEW seoul_cheap_fruit
+AS  SELECT  fno, fname
+      FROM  cheap_fruit
+      WHERE  city = '서울';
+SELECT * FROM seoul_cheap_fruit;
+----------------------------------------------------------------------------
+DROP VIEW seoul_cheap_fruit;
+
+-- 뷰에 대한 연산 조작의 예 1 (삽입,삭제가 가능한 경우) ==========
+
+CREATE TABLE customer3
+(	cno             char(10)	NOT NULL,
+	cname	      char(20)	NULL,
+	city              char(20)	NULL,
+	point            int		NULL,
+	primary key (cno)
+);
+INSERT INTO customer3 VALUES ('c1', '이순신', '서울', 200);
+INSERT INTO customer3 VALUES ('c2', '김유신', '인천', 150);
+INSERT INTO customer3 VALUES ('c3', '홍길동', '인천', 300);
+INSERT INTO customer3 VALUES ('c4', '강감찬', '서울', 200);
+INSERT INTO customer3 VALUES ('c5', '안중근', '대전', 230);
+
+SELECT * FROM customer3;
+----------------------------------------------------------------------------
+CREATE VIEW cno_city
+AS SELECT cno, city FROM customer3;
+
+SELECT * FROM customer3;
+SELECT * FROM cno_city;
+
+INSERT INTO cno_city
+VALUES ('c6', '부산');
+
+SELECT * FROM cno_city;
+SELECT * FROM customer3;
+
+DELETE FROM cno_city
+WHERE cno='c5';
+
+SELECT * FROM customer3;
+
+-- 뷰에 대한 연산 조작의 예 2 (삽입,삭제가 불가능한 경우) =========-
+CREATE VIEW point_city
+AS SELECT point, city FROM customer;
+
+SELECT * FROM point_city;
+
+INSERT INTO point_city
+VALUES (400, '광주');
+
+DELETE FROM point_city
+WHERE point=200 AND city='서울';
+
+-- 뷰에 대한 연산 조작의 예 3 (갱신이 가능한 경우) ==============
+UPDATE  point_city
+SET point = 400, city='부산'
+WHERE point=200 AND city='서울';
+
+SELECT * FROM point_city;
+SELECT * FROM customer;
+
+-- 원복
+UPDATE  point_city
+SET point = 200, city='서울'
+WHERE point=400 AND city='부산';
+
+SELECT * FROM point_city;
+SELECT * FROM customer;
+
+-- 뷰에 대한 연산 조작의 예 4 (갱신이 불가능한 경우) -------------------
+CREATE VIEW custby (cno, totqyt)
+AS  
+SELECT cno, sum(qty)
+FROM indent
+GROUP BY cno;
+
+SELECT * FROM custby;
+
+UPDATE custby
+SET totqty = 2600
+WHERE cno='c1';

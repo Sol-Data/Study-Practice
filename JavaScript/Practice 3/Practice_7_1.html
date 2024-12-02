@@ -1,0 +1,19 @@
+<html>
+  <head>
+     <title> 비만도 구하기 </title>
+  </head>
+  <body>
+     <script>
+		var height, weight, std_Weight, bmi;
+        height = parseInt(prompt("당신의 신장(Cm)은? "));
+		weight = parseInt(prompt("당신의 체중(Kg)은? "));
+		std_Weight = (height - 100) * 0.9;                 //표준체중
+		bmi = ((weight - std_Weight) / std_Weight) * 100;  //비만도
+		document.write("신장 : " +height +"(Cm)<br>");
+		document.write("체중 : " +weight +"(Kg)<br>");
+		document.write("--------------------------<br>"); 
+		document.write("표준체중 : " +std_Weight +"(Kg)<br>");
+		document.write("비만도 : " +bmi +"(%)<br>");
+     </script>
+  </body>
+</html>

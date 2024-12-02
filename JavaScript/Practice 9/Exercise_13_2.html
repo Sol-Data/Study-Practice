@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>제출문제 13-2</title>
+ </head>
+ <body>
+    <SCRIPT>
+	    var a = [[27, 17, 47, 11],
+		         [14, 12, 13, 65],
+				 [35, 19, 86, 55]];
+	    var b = [[], [], [], []];
+		var i, j;
+		document.write("배열의 초기값 : <P>");
+		for(i=0; i<3; i++) {
+			for(j=0; j<4; j++) {
+				document.write(leadingSpaces(a[i][j], 5));
+			}
+			document.write("<BR>");
+		}
+        for(i=0; i<4; i++) {    
+			for(j=0; j<5; j++) {
+				b[i][j] = 0;
+			}
+		}
+		for(i=0; i<3; i++) {
+			for(j=0; j<4; j++) {
+				b[i][j] = a[i][j];
+				b[i][4] += a[i][j];
+				b[3][j] += a[i][j];
+				b[3][4] += a[i][j];
+			}
+		}
+		document.write("<P>");
+		document.write("연산 결과 : <P>");
+		for(i=0; i<4; i++) {
+			for(j=0; j<5; j++) {
+				document.write(leadingSpaces(b[i][j], 5));
+			}
+			document.write("<BR>");
+		}	
+		function leadingSpaces(n, digits) {    
+           var spaces = "";
+           n = n.toString();
+           if (n.length < digits) {
+                for (var i = 0; i < (digits - n.length); i++)
+                     spaces += "&nbsp;&nbsp;";
+           }
+           return spaces + n;
+         }
+
+	
+
+	</SCRIPT>  
+ </body>
+</html>

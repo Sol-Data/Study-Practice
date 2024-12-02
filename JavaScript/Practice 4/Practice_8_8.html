@@ -1,0 +1,31 @@
+<html>
+  <head>
+     <title> switch문 : 점수에 따라 등급 출력 </title>
+  </head>
+  <body>
+     <script>
+	    var score, grade;
+        score = parseInt(prompt("점수를 입력하시오 : "));
+        point = Math.floor(score / 10);
+        switch(point) {
+			case 10:
+			case 9:
+			       grade = "A";
+				   break;
+		    case 8:
+			       grade = "B";
+				   break;
+			case 7:
+			       grade = "C";
+				   break;
+		    case 6:
+			       grade = "D";
+				   break;
+			default:
+			       grade = "F";
+		}
+		document.write("점수 : " +score +"<br>");
+		document.write("등급 : " +grade +"<br>");
+	 </script>
+  </body>
+</html>

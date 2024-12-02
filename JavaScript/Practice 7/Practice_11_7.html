@@ -1,0 +1,18 @@
+<html>
+  <head>
+     <title> do~while문 : 1000-1-2-3-4...-n)<0, 가장 작은 n </title>
+  </head>
+  <body>
+     <script>
+        var n, sum;
+		n = 0;
+		sum=1000;
+		do {
+		    n = n + 1;
+			sum = sum - n;
+		} while(sum>=0);
+		document.write("n = " +n +"<br>");
+		document.write("sum = " +sum +"<br>");
+     </script>
+  </body>
+</html>

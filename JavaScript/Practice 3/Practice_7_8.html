@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title> 윤년 구하기 </title>
+ </head>
+ <body>
+     <Script>
+        var day, year, cnt;
+		year = parseInt(prompt("연도 입력 : "));
+		if(((year%4 == 0) && (year%100 != 0)) || (year%400 == 0)) {
+				document.write(year +"년은 윤년입니다.<BR>");
+				document.write(year +"년은 366일입니다.<BR>");
+		} else {
+				document.write(year +"년은 윤년이 아닙니다.<BR>");
+				document.write(year +"년은 365일입니다.<BR>");
+		} 
+	 </Script>
+ </body>
+</html>

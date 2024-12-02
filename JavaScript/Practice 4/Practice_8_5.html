@@ -1,0 +1,31 @@
+<html>
+  <head>
+     <title> nested if문으로 성적 등급 출력 </title>
+  </head>
+  <body>
+     <script>
+	    var score, grade;
+        score = parseInt(prompt("점수를 입력하시오 : "));
+        if(score >= 60) {
+			if(score >= 70)	{
+                if(score >= 80) {
+				    if(score >= 90) {
+			            grade = "A";
+		            } else { 
+		                grade = "B";
+		            }
+				} else {
+				    grade = "C";
+				}
+	        } else {
+			    grade = "D";
+			}
+		} else {
+			grade = "F";
+		}
+		document.write("점수 : " +score +"<br>");
+		document.write("등급 : " +grade +"<br>");
+	 </script>
+  </body>
+</html>
+

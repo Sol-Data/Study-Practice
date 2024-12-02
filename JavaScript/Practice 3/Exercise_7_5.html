@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>자동차세금 계산(제출문제7-5)</title>
+ </head>
+ <body>
+    <SCRIPT>
+      var cc, carTax, eduTax, totTax;
+      cc = parseInt(prompt("자동차 배기량(CC)을 입력하세요"));              
+	  if(cc < 1000) {
+		  carTax = cc * 80;      // 자동차세 = 배기량 * 80
+	  } else {
+		  carTax = cc * 110;     // 자동차세 = 배기량 * 110
+	  }
+	  eduTax = carTax * 0.3;     // 지방교육세 = 자동차세 * 30%
+      totTax = carTax + eduTax;  // 자동차세금 = 자동차세 + 지방교육세
+      document.write("자동차 배기량 : " +cc +"CC<BR>");
+      document.write("자동차세 : " +carTax +"원<BR>");
+      document.write("지방교육세 : " +eduTax +"원<BR>");
+      document.write("자동차 세금 : " +totTax +"원");
+
+	</SCRIPT>
+ </body>
+</html>

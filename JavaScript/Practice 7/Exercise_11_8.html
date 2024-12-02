@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>제출문제 11-8</title>
+ </head>
+ <body>
+     <SCRIPT>
+         var 원금, 이자, 상환총액, 잔액, 회차;
+		 회차 = 0;
+		 원금 = 1000000;
+		 잔액 = 30000000;
+		 document.write("<PRE>회차   원금      이자     상환총액     잔액</PRE>");
+		 do{
+			 회차 = 회차 + 1;
+			 이자 = 잔액 * 0.00375;
+			 상환총액 = 원금 + 이자;
+			 잔액 = 잔액 - 원금 
+			 document.write(leadingSpaces(회차,2) +leadingSpaces(원금,10) 
+			 +leadingSpaces(이자, 9) +leadingSpaces(상환총액,10) 
+			 +leadingSpaces(잔액,11) +"<BR>");
+		 } while(잔액!=0);
+
+		 function leadingSpaces(n, digits) {
+         var spaces = "";
+         n = n.toString();
+         if (n.length < digits) {
+             for (var i = 0; i < (digits - n.length); i++)
+                 spaces += "&nbsp;&nbsp;";
+             }
+             return spaces + n;
+          }
+	 </SCRIPT>
+ </body>
+</html>

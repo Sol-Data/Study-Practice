@@ -1,0 +1,178 @@
+#### 변수의 선언과 치환
+===============================================================================
+USE fruitstore;
+DECLARE @myname char(20);
+SET @myname = '이순신';
+SELECT * FROM customer WHERE cname = @myname;
+===============================================================================
+USE fruitstore;
+DECLARE @myavg  int;
+SELECT @myavg = avg(point) FROM customer;
+PRINT @myavg  -- 메시지 창으로 출력
+SELECT * FROM customer WHERE point < @myavg;
+===============================================================================
+SET NOCOUNT ON 
+SELECT * FROM customer WHERE city='서울';
+===============================================================================
+SET NOCOUNT OFF
+SELECT * FROM customer WHERE city='서울';
+===============================================================================
+SET ROWCOUNT 3 -- 출력되는 튜플의 개수를 3개로 제한
+SELECT * FROM customer;
+===============================================================================
+SET ROWCOUNT 0  -- 출력되는 튜플의 개수 제한 해제
+SELECT * FROM customer;
+===============================================================================
+SELECT @@CONNECTIONS;
+===============================================================================
+USE fruitstore;
+EXEC PutCustomerDataPoint 'c9', '이성계';
+PRINT @@ERROR;
+===============================================================================
+USE fruitstore;
+CREATE TABLE ticket (
+  tno int IDENTITY(100,1),
+  tname varchar(120));
+INSERT INTO ticket (tname) VALUES ('The white night');
+INSERT INTO ticket (tname) VALUES ('A Whole new world');
+INSERT INTO ticket (tname) VALUES ('The boxer');
+SELECT @@IDENTITY;
+===============================================================================
+SELECT @@LANGUAGE;
+---------------------------------------------------------------------------------------------------------------------------
+USE fruitstore;
+SELECT * FROM customer;
+SELECT @@ROWCOUNT;
+---------------------------------------------------------------------------------------------------------------------------
+SELECT @@SERVERNAME;
+---------------------------------------------------------------------------------------------------------------------------
+SELECT @@SERVICENAME;
+---------------------------------------------------------------------------------------------------------------------------
+SELECT @@VERSION;
+---------------------------------------------------------------------------------------------------------------------------
+
+### 제어 구문
+===============================================================================
+USE fruitstore;
+IF (SELECT AVG(point) FROM customer) >= 300
+SELECT '포인트의 평균이 300 이상입니다.'
+ELSE
+BEGIN
+ SELECT '포인트의 평균이 300 미만입니다.'
+ SELECT * FROM customer WHERE point < 300
+END;
+---------------------------------------------------------------------------------------------------------------------------
+USE fruitstore;
+SELECT * FROM customer;
+IF (SELECT AVG(point) FROM customer) >= 300
+   BEGIN
+      UPDATE customer SET point = point + 30;
+      SELECT * FROM customer;
+   END;
+-- 원복
+UPDATE customer SET point = point - 30;
+SELECT * FROM customer;
+-- CASE ========================================================================
+USE fruitstore;
+SELECT cno, cname, 
+ CASE city
+  WHEN '서울' THEN 'Seoul'
+  WHEN '인천' THEN 'Incheon'
+  WHEN '대전' THEN 'Daejeon'
+  ELSE '미지정'
+ END
+FROM customer;
+---------------------------------------------------------------------------------------------------------------------------
+USE fruitstore;
+SELECT cno, cname, point,
+ CASE 
+  WHEN point < 200 THEN '신규 고객'
+  WHEN point >= 200 and point < 300 THEN '일반 고객'
+  WHEN point >= 300 and point < 400 THEN '우수 고객'
+  ELSE '최우수 고객'
+ END
+FROM customer;
+
+-- WHILE ========================================================================
+DECLARE @i INT = 1
+DECLARE @hap BIGINT = 0
+
+WHILE (@i < 100)
+BEGIN
+   IF (@i % 7 = 0)
+   BEGIN
+      PRINT N'7의배수: ' + CAST (@i AS NCHAR(3))
+      SET @i += 1
+      CONTINUE
+   END
+   SET @hap += @i
+   IF (@hap > 1000) BREAK
+   SET @i += 1
+END
+
+PRINT N'합계=' + CAST(@hap AS NCHAR(10))
+
+-- RETURN ======================================================================
+USE fruitstore;
+GO
+CREATE PROCEDURE GetCheckPoint
+   @cname char(20)
+AS
+   IF (SELECT point FROM customer WHERE cname=@cname) > 200
+      RETURN 1
+   ELSE
+      RETURN 2
+GO
+--------------------------------------------------------------------------------------------------------------------------
+DECLARE @return_status int;
+EXEC @return_status = GetCheckPoint '이순신';
+SELECT 'Return Status', @return_status;
+GO
+===============================================================================
+DECLARE @msg varchar(50);
+SET @msg = '반갑습니다';
+PRINT '안녕하세요';
+PRINT @msg;
+===============================================================================
+/*
+	여러 줄 주석입니다.
+	이 부분으로 주석이기 때문에 SQL 서버가 
+	명령으로 받아들이지 않습니다.
+*/
+DECLARE  @var  varchar(50);  -- 변수 선언
+SET  @var  =  'SQL Server 2014 Express Edition';  -- 변수에 대한 값 대입
+SELECT @var;  -- 변수 출력
+===============================================================================
+
+### 작업 단위의 지정
+===============================================================================
+-- 일괄 처리가 실행되지 않는 경우 1 =============================================
+SELECT * from fruit;
+CREATE VIEW cheap_fruit2
+AS SELECT * FROM fruit WHERE price < 2000;
+SELECT * FROM cheap_fruit2;
+
+--일괄 처리가 실행되는 경우 1 ==================================================
+SELECT * from fruit;
+GO
+CREATE VIEW cheap_fruit2
+AS SELECT * FROM fruit WHERE price < 2000;
+GO
+SELECT * FROM cheap_fruit2;
+GO
+
+-- 일괄 처리가 실행되지 않는 경우 2 =============================================
+ALTER TABLE customer ADD email char(50);
+UPDATE customer SET email = 'honggildong@sdu.ac.kr'
+WHERE cno = 'c1';
+
+-- 일괄 처리가 실행되는 경우 2 ==================================================
+ALTER TABLE customer ADD email char(50);
+GO
+UPDATE customer SET email = 'honggildong@sdu.ac.kr'
+WHERE cno = 'c1';
+GO
+
+SELECT * FROM customer;
+-- 원복
+ALTER TABLE customer DROP COLUMN email;

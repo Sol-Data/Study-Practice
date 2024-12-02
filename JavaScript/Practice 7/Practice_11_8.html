@@ -1,0 +1,18 @@
+<html>
+  <head>
+     <title> do~while : factorial 값 구하기 </title>
+  </head>
+  <body>
+     <script>
+        var n, sum;
+		sum=1;
+		n = parseInt(prompt("정수 입력 : ", "Factorial"));
+		document.write(n +"! = ");
+		do {
+		      sum = sum * n;
+			  n = n - 1;
+		} while(n>0);
+		document.write(sum +"<br>");
+     </script>
+  </body>
+</html>

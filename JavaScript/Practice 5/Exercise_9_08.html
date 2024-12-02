@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>제출문제 9-8</title>
+ </head>
+ <body>
+    <SCRIPT>
+	   var name, code, hour, overTime, position, grossSalary, tax, income;
+	   for(n=1; n<=5; n++) {
+		   name = prompt("이름 입력 : ");
+		   code = parseInt(prompt("직급 코드 : "));
+		   hour = parseInt(prompt("근무 시간 : "));
+		   overTime = 0;  // 초과근무시간 = 0
+		   if(hour > 40) {      
+			   overTime = hour - 40;   // 40시간 초과근무시간 계산
+		   }
+		   switch(code) {
+			   case 1 :    // 직급코드가 1일때
+			       position = "과장";                                // 직급(position)
+				   overPay = (overTime * 10000) * 0.5;               // 초과수당(overPay)
+				   grossSalary = 1500000 + (hour * 10000) + overPay; // 총급여(grossSalary)
+				   break;
+			   case 2 :    // 직급코드가 2일때
+			       position = "차장";
+				   overPay = (overTime * 15000) * 0.5;
+				   grossSalary = 1800000 + (hour * 15000) + overPay;
+				   break;
+			   case 3 :    // 직급코드가 3일때
+			       position = "부장";
+				   overPay = (overTime * 18000) * 0.5;
+				   grossSalary = 2000000 + (hour * 18000) + overPay;
+				   break;
+           }
+		   // 총급여에 따른 세금(tax) 계산
+		   if(grossSalary < 2000000)     
+		           tax = grossSalary * 0.08;
+		   else if(grossSalary <= 4000000)
+		           tax = grossSalary * 0.11;
+		   else
+		           tax = grossSalary * 0.15;
+		   // 실수령액 = 총급여 - 세금
+		   income = grossSalary - tax;   
+		   //
+           document.write("성명 : " +name +"<BR>");
+		   document.write("직급 : " +position +"<BR>");
+           document.write("근무시간 : " +hour +"시간<BR>");
+		   document.write("초과수당 : " +overPay +"원<BR>");
+           document.write("총급여 : " +grossSalary +"원<BR>");
+		   document.write("세금 : " +tax +"원<BR>");
+           document.write("실수령액 : " +income +"원<P>");
+	   }
+	</SCRIPT>
+ </body>
+</html>

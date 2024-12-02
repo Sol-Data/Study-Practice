@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Body에서 자바스크립트 외부 파일 선언</title>
+ </head>
+ <body>
+   <h1>body에서 자바스크립트 파일선언 실습 뚜뚜</h1>
+   <SCRIPT>
+     
+   </SCRIPT>
+ </body>
+</html>

@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>스탠드 전원 상태 출력(제출문제7-6)</title>
+ </head>
+ <body>
+    <SCRIPT>
+        var count, power;	
+		count = parseInt(prompt("전원단추 누른 횟수 입력 : "));
+		if(count % 2 == 0) {
+			  power = "Power OFF";
+	    } else {
+			  power = "Power ON";
+		}
+		document.write("전원버튼 누른 횟수 : " +count +"<BR>");
+		document.write("스탠드 전원 상태 : " +power);
+	</SCRIPT>
+ </body>
+</html>

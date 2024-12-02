@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>제출문제 Ch8-01</title>
+ </head>
+ <body>
+    <SCRIPT>
+	   var weight, height, bmi, result;
+       weight = parseInt(prompt("당신의 체중(Kg)은? ")); 
+       height = parseInt(prompt("당신의 신장(Cm)은? "));
+	   bmi = weight / Math.pow((height / 100), 2);
+	   if(bmi > 23) {
+		   result = "과체중";
+	   } else if(bmi >= 18.5) {
+		   result = "표준체중";
+	   } else {
+		   result = "저체중";
+	   }
+	   document.write("체질량지수(BMI) : " +bmi +"<BR>");
+	   document.write("판정 결과 : " +result);
+	</SCRIPT>
+ </body>
+</html>

@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>제출문제10-8</title>
+ </head>
+ <body>
+    <SCRIPT>
+	   for(i=1; i<=3; i++) {
+		   total = 0;
+		   name = prompt("이름을 입력하시오?");
+		   os = parseInt(prompt("운영체제 점수 입력 : "));
+		   ds = parseInt(prompt("자료구조 점수 입력 : "));
+		   dm = parseInt(prompt("이산수학 점수 입력 : "));
+		   total = os + ds + dm;
+		   average = total / 3;
+		   document.write(name +" ");
+		   for(n=1; n<=parseInt(average/10); n++) 
+		          document.write("●");
+		   document.write(average.toFixed(1) +"<BR>");
+	   }
+		
+	</SCRIPT>
+ </body>
+</html>

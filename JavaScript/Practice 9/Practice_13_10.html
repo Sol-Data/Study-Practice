@@ -1,0 +1,26 @@
+<html>
+  <head>
+     <title> 2차원배열 : 평균구하기 </title>
+  </head>
+  <body>
+     <script>
+         var score = [["김가희", 98, 88, 84],
+		              ["이정명", 78, 82, 74],
+				      ["최길성", 86, 90, 89]];
+		 var i, j, k, n, sum, ave;
+		 for(i=0; i<3; i++) {
+			 sum = 0;
+			 for(j=1; j<4; j++){
+				 sum = sum + score[i][j];
+			 }
+			 ave = sum / 3;    
+			 n = (ave-(ave%5))/5;
+			 document.write(score[i][0] +"  " +ave.toFixed(1) +"점 : ");
+			 for(k=1; k<=n; k++) {
+				 document.write("*");
+			 }
+             document.write("<br>");
+		 }
+	</script>
+  </body>
+</html>

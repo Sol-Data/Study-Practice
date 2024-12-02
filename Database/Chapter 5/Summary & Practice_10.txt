@@ -1,0 +1,246 @@
+======================================================
+-- 매개변수를 가지지 않는 간단한 저장 프로시저의 정의 ==========================
+USE fruitstore;
+GO
+CREATE PROCEDURE GetCustomerList
+AS
+SELECT cno '고객번호', cname '고객명'
+FROM customer;
+GO
+
+- 매개변수를 가지지 않는 간단한 저장 프로시저의 실행 ===========================
+EXEC GetCustomerList;
+
+-- 매개변수를 가지는 저장 프로시저의 정의 ===================================
+USE fruitstore;
+GO
+CREATE PROCEDURE PutCustomerData
+@cno char(10),
+@cname char(20),
+@city char(20),
+@point int
+AS
+INSERT INTO customer(cno, cname, city, point)
+VALUES (@cno, @cname, @city, @point);
+GO
+
+-- 매개변수를 가지는 저장 프로시저의 실행 ===================================
+EXEC PutCustomerData 'c7', '안창호', '부산', 250;
+GO
+SELECT * FROM customer;
+GO
+
+-- 기본값을 가지는 저장 프로시저의 정의 ====================================
+USE fruitstore;
+GO
+CREATE PROCEDURE PutCustomerDataPoint
+@cno char(10),
+@cname char(20),
+@city char(20),
+@point int = 50
+AS
+INSERT INTO customer(cno, cname, city, point)
+VALUES (@cno, @cname, @city, @point);
+GO
+
+-- 기본값을 가지는 저장 프로시저의 실행 ====================================
+EXEC PutCustomerDataPoint 'c9', '장보고', '목포';
+GO
+SELECT * FROM customer;
+GO
+
+-- 출력 매개변수를 가지는 저장 프로시저의 정의 ===============================
+USE fruitstore;
+GO
+CREATE PROCEDURE GetMaxPoint
+@tmax int OUTPUT
+AS
+SELECT @tmax = MAX(point) FROM customer;
+GO
+
+-- 출력 매개변수를 가지는 저장 프로시저의 실행 ===============================
+DECLARE @maxpoint int
+EXEC GetMaxPoint @tmax=@maxpoint OUTPUT
+SELECT * FROM customer WHERE point = @maxpoint;
+GO
+
+======================================================
+USE fruitstore;
+GO
+SP_HELPTEXT GetCustomerList;
+GO
+------------------------------------------------------------------
+ALTER PROCEDURE GetCustomerLIst
+@cname char(20)
+AS
+SELECT '고객번호:', cno, '거주지:', city
+FROM customer
+WHERE cname=@cname;
+GO
+------------------------------------------------------------------
+SP_HELPTEXT GetCustomerList;
+EXEC GetCustomerList '유관순';
+================================================================
+USE fruitstore;
+GO
+CREATE PROCEDURE GetAllCustomer
+AS
+SELECT cno AS '고객번호', cname AS '고객명', city AS '거주지', point AS '점수'
+FROM customer;
+GO
+------------------------------------------------------------------
+USE fruitstore;
+GO
+SP_HELPTEXT 'GetAllCustomer';
+EXEC GetAllCustomer;
+
+--WITH ENCRYPTION 옵션 사용 =========================================
+USE fruitstore;
+GO
+ALTER PROCEDURE GetAllCustomer
+WITH ENCRYPTION
+AS
+SELECT cno AS '고객번호', cname AS '고객명', city AS '거주지', point AS '점수'
+FROM customer;
+GO
+------------------------------------------------------------------
+USE fruitstore;
+GO
+SP_HELPTEXT 'GetAllCustomer'
+EXEC  GetAllCustomer
+
+--저장 프로시저 삭제 ==================================================
+USE fruitstore;
+GO
+DROP PROCEDURE GetCustomerList;
+GO
+
+--그룹핑된 저장 프로시저의 생성 ==========================================
+CREATE PROC usp_GroupingProc;1
+AS
+SELECT cno, cname, city FROM customer;
+GO
+CREATE PROC usp_GroupingProc;2
+AS
+SELECT cno, cname, point FROM customer;
+GO
+------------------------------------------------------------------
+EXEC usp_GroupingProc;1
+GO
+EXEC usp_GroupingProc;2
+GO
+--그룹핑된 저장 프로시저의 삭제===========================================
+USE fruitstore;
+GO
+DROP PROC usp_GroupingProc;1   -- 삭제 오류 발생 
+GO
+------------------------------------------------------------------
+USE fruitstore;
+GO
+DROP PROC usp_GroupingProc;
+GO
+
+======================================================
+-- sp_addmessage / sp_dropmessage ==================================================================
+USE master
+GO
+SELECT message_id, language_id, severity, text FROM sys.messages order by message_id desc;
+GO
+------------------------------------------------------------------
+EXEC sp_addmessage 50001, 16,
+'Percentage expects a value between 20 and 100.', 'English';
+GO
+------------------------------------------------------------------
+EXEC sp_addmessage 60001, 16, 
+'20부터 100사이의 값을 퍼센트 값으로 입력해야 합니다.', '한국어'
+GO
+------------------------------------------------------------------
+EXEC sp_addmessage 50001, 16, 
+'20부터 100사이의 값을 퍼센트 값으로 입력해야 합니다.', '한국어'
+GO
+------------------------------------------------------------------
+SELECT * FROM sys.messages WHERE message_id = 50001;
+------------------------------------------------------------------
+USE master
+GO
+EXEC sp_dropmessage 50001, '한국어';
+GO
+EXEC sp_dropmessage 50001, 'English';
+GO
+SELECT message_id, language_id, severity, text 
+FROM sys.messages
+Go
+
+-- sp_addtype/sp_droptype ==================================================================
+USE master
+GO
+EXEC sp_addtype  ssn, 'varchar(20)', 'NOT NULL';
+GO
+------------------------------------------------------------------
+SELECT * FROM sys.types order by user_type_id desc;  
+GO
+------------------------------------------------------------------
+EXEC sp_droptype  ssn
+GO
+------------------------------------------------------------------
+SELECT * FROM sys.types order by user_type_id desc;   
+
+-- sp_depends ====================================================
+USE fruitstore;
+GO
+EXEC sp_depends 'customer';   -- sp_depends customer; 로 사용해도 된다.
+GO
+------------------------------------------------------------------
+-- 아래 저장 프로시저가 정상적으로 수행되려면 fruit테이블에 대해 view가 하나 이상 만들어져 있어야 함
+USE fruitstore;
+GO
+EXEC sp_depends 'fruit';
+GO
+------------------------------------------------------------------
+USE fruitstore;
+GO
+CREATE VIEW cheap_fruit (fno, fname, quantity, city)
+AS  SELECT  fno, fname, quantity, city
+      FROM  fruit
+      WHERE  price <= 1000;
+-- sp_help =======================================================
+USE fruitstore;
+GO
+EXEC sp_help 'customer';  -- sp_help customer; 로 사용해도 된다.
+GO
+------------------------------------------------------------------
+EXEC sp_help cheap_fruit; 
+GO
+-- sp_helpdb =====================================================
+USE fruitstore;
+GO
+EXEC sp_helpdb 'fruitstore';  -- sp_helpdb fruitstore; 로 사용해도 된다.
+GO
+-- sp_helpindex ==================================================
+USE fruitstore;
+GO
+EXEC sp_helpindex 'customer';  -- sp_helpindex customer; 로 사용해도 된다.
+GO
+-- sp_helptext ===================================================
+USE fruitstore;
+GO
+EXEC sp_helptext 'cheap_fruit';  -- sp_helptext cheap_fruit; 로 사용해도 된다.
+GO
+-- sp_rename =====================================================
+USE fruitstore;
+GO
+EXEC sp_rename 'customer.city', 'address';
+GO
+SELECT * FROM customer;
+GO
+------------------------------------------------------------------
+EXEC sp_rename 'customer.address', 'city';
+GO
+SELECT * FROM customer;
+GO
+-- sp_who ========================================================
+USE master;
+GO
+EXEC sp_who;
+GO
+===================================================================

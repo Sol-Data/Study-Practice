@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>제출문제6-5</title>
+ </head>
+ <body>
+    <SCRIPT>
+       var cost, price, amount, sales, margin;
+	   cost = 30000;          // 원가 = 30,000원
+       price = 46000;         // 판매가 = 46,000원
+	   amount = parseInt(prompt("판매수량을 입력하시오")); // 판매수량
+	   sales = price * amount;   // 총판매액 = 판매가 * 판매수량
+	   margin = (price - cost) * amount; // 총이익 = (판매가-원가)*판매수량
+	   document.write("판매수량 : " +amount +"원<BR>");
+	   document.write("총판매액 : " +sales +"원<BR>");
+	   document.write("총이익 : " +margin +"원<BR>");
+   	</SCRIPT>
+ </body>
+</html>

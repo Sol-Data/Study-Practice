@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>제출문제 12-2</title>
+ </head>
+ <body>
+     <SCRIPT>
+         var a = [11, 22, 33, 44, 55, 66, 77, 88, 99, 100];
+		 var min, index, gap = []; 
+		 document.write("입력된 데이터 : ");
+		 for(i=0; i<10; i++) {
+			 document.write(a[i] + "&nbsp;&nbsp;&nbsp;");
+		 }
+		 document.write("<BR><BR>");
+		 for(i=0; i<10; i++) {
+			 gap[i] = Math.abs(a[i] - 40);
+		 }
+		 min = gap[0];
+		 index = 0;
+		 for(i=0; i<10; i++) {
+			 if(gap[i] < min) {
+				    min = gap[i];
+					index = i;
+			 }
+		 }
+		 document.write("정수 40에 가장 가까운 수 : " + a[index] +"<BR>");
+		 document.write("배열의 " + (index + 1) +" 번째 위치"); 
+
+	 </SCRIPT>
+ </body>
+</html>

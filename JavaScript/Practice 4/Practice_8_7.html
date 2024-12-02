@@ -1,0 +1,29 @@
+<html>
+  <head>
+     <title> switch문 : 연산자 입력에 따라 결과 출력 </title>
+  </head>
+  <body>
+     <script>
+	    var num1, num2, opr;
+        num1 = parseInt(prompt("첫번째 정수를 입력 : "));
+		num2 = parseInt(prompt("두번째 정수를 입력 : "));
+		opr = prompt("연산자(+, -, *, /) 입력 : ");
+        switch(opr) {
+		    case "+":
+				document.write(num1 +" + " +num2 +" = " +(num1+num2));
+				break
+		    case "-":
+			    document.write(num1 +" - " +num2 +" = " +(num1-num2));
+				break;
+		    case "*":
+			    document.write(num1 +" * " +num2 +" = " +(num1*num2));
+				break;
+		    case "/":
+			    document.write(num1 +" / " +num2 +" = " +(num1/num2));
+				break;
+		    default:
+			   document.write("Error : Unknown Operator<br>");
+		}
+	 </script>
+  </body>
+</html>

@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>제출문제 9장-01</title>
+ </head>
+ <body>
+    <SCRIPT>
+       var min, max, tmp, i;
+	   min = parseInt(prompt("첫번째 수 입력 : "));
+	   max = parseInt(prompt("두번째 수 입력 : "));
+	   if(min > max) {
+		   tmp = min;
+		   min = max;
+		   max = tmp;
+	   }
+	   document.write(min +" 부터 " +max +" 사이의 5의 배수 : ");
+	   for(i=min; i<=max; i++) {
+		   if(i % 5 == 0) {
+			   document.write(i + "&nbsp;&nbsp;&nbsp;&nbsp;");
+		   }
+	   }
+	</SCRIPT>
+ </body>
+</html>

@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Document</title>
+ </head>
+ <body>
+    <script>
+    var a = [12, 14, 16, 20, 24, 37];
+	var b = [13, 17, 18, 30];
+	var c = [];
+	var aptr = 0, bptr = 0, su = a.length + b.length;
+	for(i=0; i<su; i++) {
+			if(bptr == b.length) {
+				c[i] = a[aptr++];
+				continue;
+			}
+			if(aptr == a.length) {
+				c[i] = b[bptr++];
+				continue;
+			}
+	        if(a[aptr] < b[bptr]) {
+			      c[i] = a[aptr++];
+		     } else {
+			      c[i] = b[bptr++];
+			}
+	
+	}
+	for(i=0; i<su; i++) {
+	    document.write(c[i] + "&nbsp;&nbsp;&nbsp;");
+	}
+	</script>
+ </body>
+</html>

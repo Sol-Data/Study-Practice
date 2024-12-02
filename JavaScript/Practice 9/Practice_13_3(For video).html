@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>배열 : 가장 작은 값을 갖는 원소와 첫번째 원소와의 교환</title>
+ </head>
+ <body>
+    <SCRIPT>
+	    var a = [67, 54, 86, 32, 21, 18, 29, 45];
+		var i, minindex, temp;
+		document.write("수행 전 : ");
+		for(i=0; i<a.length; i++) {
+			document.write(a[i] + "&nbsp;&nbsp;&nbsp;");
+		}
+		minindex = 0;
+        for(i=0; i<a.length; i++) {
+			if(a[minindex] > a[i]) {
+				minindex = i;
+			}
+		}
+		temp = a[minindex];
+		a[minindex]=a[0];
+		a[0] = temp;
+		document.write("<BR>");
+		document.write("수행 후 : ");
+		for(i=0; i<a.length; i++) {
+			document.write(a[i] + "&nbsp;&nbsp;&nbsp;");
+		}
+	</SCRIPT>
+ </body>
+</html>

@@ -1,0 +1,32 @@
+<html>
+  <head>
+     <title> 배열 : 선택정렬(a)  </title>
+  </head>
+  <body>
+     <script>
+        var a = [67, 54, 86, 32, 21, 18, 29, 45];
+		var i, j, k, minidx, temp;
+		document.write("&nbsp;&nbsp;&nbsp;정렬 전: ");     //정렬 전 배열 출력
+		for(i=0; i<8; i++) {
+			document.write(a[i] +"&nbsp;&nbsp;&nbsp; ");
+		}
+		for(i=0; i<7; i++) {       // 기준 원소의 첨자
+			for(j=i+1; j<8; j++) {     // 비교할 나머지 원소의 첨자
+				if(a[i] > a[j]) {
+					temp = a[i];
+					a[i] = a[j];
+					a[j] = temp;
+				}
+			}
+			document.write("<p> i = " +i +" 일때 : ");      //배열 출력
+			for(k=0; k<8; k++) {
+				document.write(a[k] +"&nbsp;&nbsp;&nbsp; ");
+			}
+		}
+		document.write("<p>&nbsp;&nbsp;&nbsp;정렬 후 : ");  //정렬 후 배열 출력
+		for(i=0; i<8; i++) {
+			document.write(a[i] +"&nbsp;&nbsp;&nbsp; ");
+		}
+     </script>
+  </body>
+</html>
